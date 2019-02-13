@@ -62,8 +62,9 @@ namespace TechJobsConsole
 
                     // Fetch results
                     if (columnChoice.Equals("all"))
-                    {
-                        Console.WriteLine("Search all fields not yet implemented.");
+                    {                        
+                        searchResults = JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
                     }
                     else
                     {
@@ -119,58 +120,15 @@ namespace TechJobsConsole
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
 
-            // create list called headers
-            List<string> headers = new List<string>();
-            List<string> itemKey = new List<string>();
-            List<string> itemValue = new List<string>();
-            int i=0;
-
-            // create dictionary with strings called row
-            Dictionary<string, string> row = someJobs[i];
-            
-            for(i=0; i<someJobs.Count; i++)
-            { 
-                row = someJobs[i];
-
-                // loop through the row dictionary 
-                foreach(KeyValuePair<string, string> jobSet in row)
-                {                                               
-                    // add each key in row dictionary to headers       
-                    headers.Add(jobSet.Key);                    
-                }
-
-                foreach(KeyValuePair<string, string> jobSet in row)
-                {
-                    
-                }
-
-                // loop through the row dictionary
-                foreach(KeyValuePair<string, string> jobSet in row)
-                {
-                    // add each value in row dictionary to itemValue
-                    itemValue.Add(jobSet.Value);
-                }
-
-                break;  
-            }
-
-            for(i=0; i<someJobs.Count; i++)
-            {
-                if(i<someJobs.Count){
-                // loop through the list headers 
-                foreach(string word in headers)
-                {
-                    // display the words in list headers
-                    Console.WriteLine(word);
-                }
-
-                // loop through the list itemValue
-                /*foreach(string word in itemValue)
-                {
-                    // display the words in list itemValue
-                    Console.WriteLine(word);
-                }*/
-            } }
+           foreach(Dictionary<string, string> labels in someJobs)
+           {
+               Console.WriteLine("\n**********");
+               foreach(KeyValuePair<string, string> word in labels)
+               {
+                   Console.WriteLine(word.Key + " " + word.Value);
+               }
+               Console.WriteLine("**********\n");
+           }
         } 
 
 
